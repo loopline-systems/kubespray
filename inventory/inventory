@@ -5,6 +5,7 @@ lls-lon-testing01 	ansible_host=10.100.0.5 ip=10.100.0.5
 k8-dedicated-master     ansible_host=10.100.0.2 ip=10.100.0.2
 k8-node1		ansible_host=10.100.0.6 ip=10.100.0.6
 k8-node2		ansible_host=10.100.0.4 ip=10.100.0.4
+k8-node3		ansible_host=10.100.0.8 ip=10.100.0.8
 k8-test-template	ansible_host=10.100.0.7 ip=10.100.0.7
 
 # ## configure a bastion host if your nodes are not directly reachable
@@ -24,6 +25,7 @@ k8-node1
 lls-lon-testing01
 k8-node1
 k8-node2
+k8-node3
 k8-dedicated-master
 k8-test-template
 
