@@ -89,7 +89,7 @@
     - /etc/ssl/etcd
     - /var/log/calico
     - /etc/cni
-    - /etc/nginx
+    - "{{ custom_nginx_proxy_path|default(nginx_proxy_path) }}"
     - /etc/dnsmasq.d
     - /etc/dnsmasq.conf
     - /etc/dnsmasq.d-available
