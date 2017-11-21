@@ -104,8 +104,7 @@
     - { role: kubespray-defaults}
     - { role: kubernetes-apps, tags: apps }
 
-- hosts: kube-master[0]
+- hosts: kube-master
   any_errors_fatal: "{{ any_errors_fatal | default(true) }}"
   roles:
-    - { role: node-checker}
-    - { role: kubernetes-apps, tags: apps }
+    - { role: node-checker, tags: master }

@@ -8,5 +8,5 @@
 - name: Add Cronjob for check-k8s-nodes.sh
   cron:
     user: root
-    minute: *
+    minute: "*"
     job: /opt/check-k8s-nodes.sh
