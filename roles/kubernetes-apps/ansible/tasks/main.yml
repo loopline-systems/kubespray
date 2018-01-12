@@ -5,7 +5,7 @@
   register: result
   until: result.status == 200
   retries: 10
-  delay: 6
+  delay: 2
   when: inventory_hostname == groups['kube-master'][0]
 
 - name: Kubernetes Apps | Delete old kubedns resources
@@ -15,7 +15,9 @@
     kubectl: "{{bin_dir}}/kubectl"
     resource: "{{ item }}"
     state: absent
-  with_items: ['deploy', 'svc']
+  with_items:
+    - 'deploy'
+    - 'svc'
   tags:
     - upgrade
 

@@ -1,4 +1,10 @@
 ---
+- name: file_download | Downloading...
+  debug:
+    msg:
+      - "URL: {{ download.url }}"
+      - "Dest: {{ download.dest }}"
+
 - name: file_download | Create dest directory
   file:
     path: "{{local_release_dir}}/{{download.dest|dirname}}"
@@ -19,7 +25,6 @@
   until: "'OK' in get_url_result.msg or 'file already exists' in get_url_result.msg"
   retries: 4
   delay: "{{ retry_stagger | random + 3 }}"
-  environment: "{{ proxy_env }}"
   when:
     - download.enabled
     - download.file

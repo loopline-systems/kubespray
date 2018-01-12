@@ -75,7 +75,7 @@ kube-apiserver via port 8080. A kubeconfig file is not necessary in this case,
 because kubectl will use http://localhost:8080 to connect. The kubeconfig files
 generated will point to localhost (on kube-masters) and kube-node hosts will
 connect either to a localhost nginx proxy or to a loadbalancer if configured.
-More details on this process are in the [HA guide](ha.md).
+More details on this process are in the [HA guide](ha-mode.md).
 
 Kubespray permits connecting to the cluster remotely on any IP of any 
 kube-master host on port 6443 by default. However, this requires 
@@ -93,18 +93,19 @@ the Kubernetes [documentation](https://kubernetes.io/docs/tasks/access-applicati
 Accessing Kubernetes Dashboard
 ------------------------------
 
-If the variable `dashboard_enabled` is set (default is true) as well as
-kube_basic_auth (default is false), then you can
-access the Kubernetes Dashboard at the following URL:
+As of kubernetes-dashboard v1.7.x:
+* New login options that use apiserver auth proxying of token/basic/kubeconfig by default
+* Requires RBAC in authorization_modes
+* Only serves over https
+* No longer available at https://first_master:6443/ui until apiserver is updated with the https proxy URL
 
-  https://kube:_kube-password_@_host_:6443/ui/
+If the variable `dashboard_enabled` is set (default is true), then you can access the Kubernetes Dashboard at the following URL, You will be prompted for credentials:
+https://first_master:6443/api/v1/namespaces/kube-system/services/https:kubernetes-dashboard:/proxy/#!/login
 
-To see the password, refer to the section above, titled *Connecting to
-Kubernetes*. The host can be any kube-master or kube-node or loadbalancer
-(when enabled).
+Or you can run 'kubectl proxy' from your local machine to access dashboard in your browser from:
+http://localhost:8001/api/v1/namespaces/kube-system/services/https:kubernetes-dashboard:/proxy/#!/login
 
-To access the Dashboard with basic auth disabled, follow the instructions here:
-https://kubernetes.io/docs/tasks/access-application-cluster/web-ui-dashboard/#command-line-proxy
+It is recommended to access dashboard from behind a gateway (like Ingress Controller) that enforces an authentication token. Details and other access options here: https://github.com/kubernetes/dashboard/wiki/Accessing-Dashboard---1.7.X-and-above
 
 Accessing Kubernetes API
 ------------------------
