@@ -37,7 +37,7 @@ bin_dir: /usr/local/bin
 ## ! change it to e.g. /etc/k8s-nginx-proxy if you are running a default nginx on the same host in /etc/nginx
 ## otherwise it will overwrite your /etc/nginx/nginx.conf file
 ## defaults to /etc/nginx
-#custom_nginx_proxy_path: /etc/k8s-nginx-proxy
+custom_nginx_proxy_path: /etc/k8s-nginx-proxy
 
 ### OTHER OPTIONAL VARIABLES
 ## For some things, kubelet needs to load kernel modules.  For example, dynamic kernel services are needed
